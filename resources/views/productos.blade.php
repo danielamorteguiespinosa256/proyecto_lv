@@ -115,7 +115,7 @@
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
                         <td>${{ number_format($product->price, 2) }}</td>
-                        <td><button onclick="agregarAlCarrito({{ $product->toJson() }})">Añadir</button></td>
+                        <td><button data-product='{!!json_encode($product)!!}' onclick="agregarAlCarrito(JSON.parse(this.dataset.product))">Añadir</button></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -183,8 +183,10 @@
                         <button onclick="eliminarDelCarrito(${item.id})">Quitar</button>
                     </div>`;
             });
-
             totalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
+            totalDiv.innerHTML += '<br><a href="/checkout" style="display: block; margin-top: 12px; text-align: center; background: #4f46e5; color: white; padding: 8px 0; border-radius: 5px; text-decoration: none;">Finalizar Compra</a>';
+
+           
         }
 
         mostrarCarrito();
