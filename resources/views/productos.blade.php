@@ -110,14 +110,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products as $product)
+                    @forelse($products as $product)
                     <tr>
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
                         <td>${{ number_format($product->price, 2) }}</td>
                         <td><button data-product='{!!json_encode($product)!!}' onclick="agregarAlCarrito(JSON.parse(this.dataset.product))">Añadir</button></td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding:16px; color:#888;">No hay productos disponibles.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
